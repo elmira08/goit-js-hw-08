@@ -88,12 +88,16 @@ gallery.insertAdjacentHTML("afterbegin", createMarkup(images));
 
 gallery.addEventListener("click", (event) =>
 {
-    event.preventDefault();
-    const clickedImage = event.target.closest(".gallery-image");
+  event.preventDefault();
+  
+  const clickedImage = event.target;
+  if (!clickedImage.classList.contains("gallery-image")) {
+    return; 
+  }
     const largeImageUrl = clickedImage.dataset.source;
      console.log(largeImageUrl);
   const instance = basicLightbox.create(`
-     <div class="modal"><img src="${largeImageUrl}" alt="Large image" width="1112" height="640"></div>
+     <div class="modal"><img src="${largeImageUrl}" alt="${clickedImage.alt}" width="1112" height="640"></div>
 
   `);
 
